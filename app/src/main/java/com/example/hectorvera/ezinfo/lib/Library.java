@@ -27,4 +27,6 @@ public class Library {
     public static final long MAIN_CATEGORY = 0;
     public static final long SUB_CATEGORIES = 1;
     public static final long CONTENT_FLAG = 2;
+
+    public static final String DEBUG = "Debug";
 }

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.hectorvera.ezinfo.POJO.Information;
 import com.example.hectorvera.ezinfo.db.InformationDao;
+import com.example.hectorvera.ezinfo.lib.FirstUpLoad;
 import com.example.hectorvera.ezinfo.lib.Library;
 import com.example.hectorvera.ezinfo.lib.Test;
 import com.firebase.client.Firebase;
@@ -39,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
+        InformationDao informationDao = new InformationDao(getBaseContext());
+
+        if(informationDao.countMainCategories() == 0){
+            FirstUpLoad firstUpLoad = new FirstUpLoad(informationDao);
+            firstUpLoad.upLoadMainCategory();
+        }
+
         Firebase.setAndroidContext(this);
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -52,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
                             )
                                     .build(),
                             RC_SIGN_IN);
-                    //Toast.makeText(MainActivity.this,"Logged in", Toast.LENGTH_LONG).show();
                 }
                 else {
+
                     //Toast.makeText(MainActivity.this,"Not logged in", Toast.LENGTH_LONG).show();
                 }
             }

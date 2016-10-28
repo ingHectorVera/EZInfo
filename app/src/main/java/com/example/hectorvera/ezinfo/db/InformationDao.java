@@ -105,6 +105,20 @@ public class InformationDao extends SQLiteOpenHelper {
         return mainCat;
     }
 
+    public int countMainCategories(){
+        int count = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(Library.TABLE_NAME_I,
+                new String[]{Library.I_ID, Library.I_NAME, Library.I_CONTENT, Library.I_IS_TOP_LEVEL}, //columns
+                Library.I_IS_TOP_LEVEL+"= ?",             //Conditions
+                new String[]{Library.MAIN_CATEGORY+""}, //values
+                null,null,null);//group by, having, order by
+        if(cursor != null){
+            count = cursor.getCount();
+        }
+        return count;
+    }
+
     public ArrayList<Information> getInformation(long parentId){
         ArrayList<Information> informations = new ArrayList<Information>();
         SQLiteDatabase db = this.getReadableDatabase();
