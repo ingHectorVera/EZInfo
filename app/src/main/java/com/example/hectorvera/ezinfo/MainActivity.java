@@ -18,7 +18,6 @@ import com.example.hectorvera.ezinfo.db.InformationDao;
 import com.example.hectorvera.ezinfo.lib.FirstUpLoad;
 import com.example.hectorvera.ezinfo.lib.Library;
 import com.example.hectorvera.ezinfo.lib.Test;
-import com.firebase.client.Firebase;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        Firebase.setAndroidContext(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
         InformationDao informationDao = new InformationDao(getBaseContext());
@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
             firstUpLoad.upLoadMainCategory();
         }
 
-        Firebase.setAndroidContext(this);
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -93,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
+
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }

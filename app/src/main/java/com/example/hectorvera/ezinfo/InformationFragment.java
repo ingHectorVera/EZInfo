@@ -27,6 +27,7 @@ public class InformationFragment extends Fragment {
     private CheckBox cEditable;
     private Button bSaveModif;
     private static CheckBox cSave;
+    //private static EditText eTitle;
     private static EditText eInformation;
     private ScrollView scInformation;
     public InformationFragment() {
@@ -46,6 +47,7 @@ public class InformationFragment extends Fragment {
         cEditable = ((CheckBox) view.findViewById(R.id.cEditable));
         cSave = ((CheckBox) view.findViewById(R.id.cSave));
         scInformation = ((ScrollView) view.findViewById(R.id.scInformation));
+        //eTitle = ((EditText) view.findViewById(R.id.eTitle));
         eInformation = ((EditText) view.findViewById(R.id.eInformation));
         bSaveModif = ((Button) view.findViewById(R.id.bSaveModif));
         bSaveModif.setEnabled(false);
@@ -79,7 +81,14 @@ public class InformationFragment extends Fragment {
         bSaveModif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Modification saved", Toast.LENGTH_SHORT).show();
+                /*Info info = new Info();
+                info.setName(eTitle.getText().toString());
+                info.setContent(eInformation.getText().toString());
+                info.setImage("");
+                info.setVersion(0);
+
+                FBConnection.updateInfo(info);*/
+                Toast.makeText(v.getContext(), "Saved", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -95,6 +104,7 @@ public class InformationFragment extends Fragment {
         @Override
 
         public void onReceive(Context context, Intent intent) {
+            Info info = FBConnection.readInfo(Library.TITLE);
             String content = intent.getStringExtra(Library.CONTENT);
             String title = intent.getStringExtra(Library.TITLE);
             boolean connection_flag = intent.getBooleanExtra(Library.CONNECTION_FLAG_KEY, false);
@@ -105,7 +115,8 @@ public class InformationFragment extends Fragment {
                 cSave.setText("Information saved");
                 cSave.setChecked(true);
             }
-            eInformation.setText(title +"\n\n"+content);
+            //eTitle.setText(title);
+            eInformation.setText(content);
             Log.d("DEBUG", "BR: "+ content);
         }
     }

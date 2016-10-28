@@ -63,6 +63,17 @@ public class ContainerActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onStop() {
+        super.onStop();
+        AuthUI.getInstance().signOut(ContainerActivity.this).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                finish();
+            }
+        });
+
+    }
 
 
 

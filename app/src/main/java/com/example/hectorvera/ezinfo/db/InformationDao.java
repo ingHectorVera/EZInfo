@@ -55,14 +55,22 @@ public class InformationDao extends SQLiteOpenHelper {
     public boolean isRelation(long parentId, long contentId){
         boolean flag = false;
         SQLiteDatabase db = this.getReadableDatabase();
-        //Cursor cursor
+        Cursor cursor = db.query(Library.TABLE_NAME_R,
+                new String[]{Library.R_PARENT_ID},
+                Library.R_PARENT_ID+"=? AND "+Library.R_CONTENT_ID+"=?",
+                new String[]{parentId+"", contentId+""},
+                null,null,null);
+        if(cursor.getCount()>0){
+            flag = true;
+        }
         return flag;
     }
 
     //nuevo
     public void updateContent(long id, String content){
         SQLiteDatabase db = this.getWritableDatabase();
-
+        Cursor cursor = db.rawQuery(DbLibrary.UPDATE_CONTENT,
+                new String[]{content, id+""});
     }
 
     public long getInformationId(String title, String content, Long isTopLevel){

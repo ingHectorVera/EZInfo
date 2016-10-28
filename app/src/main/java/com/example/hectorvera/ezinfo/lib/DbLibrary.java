@@ -38,4 +38,8 @@ public class DbLibrary {
 
     public static String DELETE_INFORMATION = "DELETE FROM "+TABLE_NAME_I
             + " WHERE "+I_ID+"=?";
+
+    public static String UPDATE_CONTENT = "UPDATE "+ Library.TABLE_NAME_I +
+            " SET ("+Library.I_CONTENT + "=?) WHERE "+
+            Library.I_ID + "=?";
 }

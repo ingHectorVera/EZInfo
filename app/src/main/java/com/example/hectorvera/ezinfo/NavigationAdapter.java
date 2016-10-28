@@ -17,6 +17,7 @@ import com.example.hectorvera.ezinfo.lib.Library;
 import com.example.hectorvera.ezinfo.lib.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by User on 10/23/2016.
@@ -26,6 +27,8 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.In
 
     private ArrayList<Information> informations;
     private ArrayList<Information> backup;
+    private List<Info> infos;
+    private List<Info> backup2;
     //private InformationHolder holder;
     private TextView txtBreadCrumbs;
     private boolean connectionflag;
@@ -34,7 +37,11 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.In
 
     public NavigationAdapter(ArrayList<Information> informations){
         this.informations = informations;
-        //backup = new ArrayList<Information>();
+        backup = new ArrayList<Information>();
+    }
+
+    public NavigationAdapter(List<Info> infos){
+        this.infos = infos;
     }
 
     @Override
@@ -54,7 +61,10 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.In
 
     @Override
     public int getItemCount() {
-        return informations.size();
+        if(informations == null)
+            return 0;
+        else
+            return informations.size();
     }
 
     public ArrayList<Information> getInformations(){
@@ -89,8 +99,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.In
             menuCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    //ArrayList<Information> cat = Test.getSubCategories();
+                    int pos = getAdapterPosition();//ArrayList<Information> cat = Test.getSubCategories();
                     //int item = getItemCount();
                     backup = (ArrayList<Information>) informations.clone();
                     informations = null;

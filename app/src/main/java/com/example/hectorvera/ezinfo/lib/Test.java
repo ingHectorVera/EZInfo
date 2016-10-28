@@ -1,8 +1,15 @@
 package com.example.hectorvera.ezinfo.lib;
 
+import android.util.Log;
+
+import com.example.hectorvera.ezinfo.Category;
+import com.example.hectorvera.ezinfo.FBConnection;
+import com.example.hectorvera.ezinfo.Info;
 import com.example.hectorvera.ezinfo.POJO.Information;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by User on 10/23/2016.
@@ -62,5 +69,19 @@ public class Test {
         informations.add(new Information("Society and social sciences","", Library.MAIN_CATEGORY));
         informations.add(new Information("Technology and applied sciences","", Library.MAIN_CATEGORY));
         return informations;
+    }
+    public static List<Info> getMainCategoryFB(){
+        Log.d("GET MAIN CATE ", "HAPPENED!");
+        List<Category> cates =  FBConnection.readLCategory("");
+        List<Info> infos = new LinkedList<Info>();
+        for (Category c:cates)
+        {
+            Info i = new Info();
+            i.setName(c.getName());
+            i.setParent(c.getParent());
+            infos.add(i);
+        }
+        return infos;
+
     }
 }

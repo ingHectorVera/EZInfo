@@ -18,6 +18,7 @@ import com.example.hectorvera.ezinfo.db.InformationDao;
 import com.example.hectorvera.ezinfo.lib.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class NavigationFragment extends Fragment {
