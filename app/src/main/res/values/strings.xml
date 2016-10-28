@@ -7,4 +7,6 @@
     <string name="edit_information">Edit Info</string>
     <string name="save_information">Save Info</string>
     <string name="saved_modificaton">Saved modificaton</string>
+    <string name="search">Search</string>
+    <string name="logout">Logout</string>
 </resources>

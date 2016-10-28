@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.hectorvera.ezinfo.POJO.Information;
+import com.example.hectorvera.ezinfo.POJO.Relation;
 import com.example.hectorvera.ezinfo.lib.DbLibrary;
 import com.example.hectorvera.ezinfo.lib.Library;
 
@@ -38,17 +39,29 @@ public class InformationDao extends SQLiteOpenHelper {
         values.put(Library.I_CONTENT, information.getContent());
         values.put(Library.I_IS_TOP_LEVEL, information.getIsTopLevel());
         db.insert(Library.TABLE_NAME_I, null, values);
-        if(information.getRelation() != null){
-            values.clear();
-            values.put(Library.R_PARENT_ID, information.getRelation().getParentId());
-            values.put(Library.R_CONTENT_ID, information.getRelation().getContentId());
-            values.put(Library.R_RANK, information.getRelation().getRank());
-            db.insert(Library.TABLE_NAME_R, null, values);
-        }
         db.close();
     }
-
+    //nuevo
     public void addRelation(long parentId, long contentId, long rank){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Library.R_PARENT_ID, parentId);
+        values.put(Library.R_CONTENT_ID, contentId);
+        values.put(Library.R_RANK, rank);
+        db.insert(Library.TABLE_NAME_R, null, values);
+        db.close();
+    }
+    //nuevo
+    public boolean isRelation(long parentId, long contentId){
+        boolean flag = false;
+        SQLiteDatabase db = this.getReadableDatabase();
+        //Cursor cursor
+        return flag;
+    }
+
+    //nuevo
+    public void updateContent(long id, String content){
+        SQLiteDatabase db = this.getWritableDatabase();
 
     }
 

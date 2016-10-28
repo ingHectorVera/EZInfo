@@ -10,6 +10,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="com.example.hectorvera.ezinfo.ContainerActivity">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="@string/logout"
+        android:id="@+id/onLogout"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +29,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:id="@+id/onSearch"
-            android:text="Search"/>
+            android:text="@string/search"/>
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
