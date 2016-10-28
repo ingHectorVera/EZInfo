@@ -23,6 +23,7 @@ public class Library {
     public static final String BROADCAST_NAME = "com.MAC.Training.InfoReceiver";
     public static final String TITLE = "Title";
     public static final String CONTENT = "Content";
+    public static final String PARENT_ID = "parentId";
     public static final String CONNECTION_FLAG_KEY = "ConnectionFlag";
     public static final long MAIN_CATEGORY = 0;
     public static final long SUB_CATEGORIES = 1;

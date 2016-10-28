@@ -40,6 +40,6 @@ public class DbLibrary {
             + " WHERE "+I_ID+"=?";
 
     public static String UPDATE_CONTENT = "UPDATE "+ Library.TABLE_NAME_I +
-            " SET ("+Library.I_CONTENT + "=?) WHERE "+
+            " SET "+Library.I_CONTENT + "=? WHERE "+
             Library.I_ID + "=?";
 }

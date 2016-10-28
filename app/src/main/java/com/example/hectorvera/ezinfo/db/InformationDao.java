@@ -69,8 +69,13 @@ public class InformationDao extends SQLiteOpenHelper {
     //nuevo
     public void updateContent(long id, String content){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(DbLibrary.UPDATE_CONTENT,
-                new String[]{content, id+""});
+        /*Cursor cursor = db.rawQuery(DbLibrary.UPDATE_CONTENT,
+                new String[]{content, id+""});*/
+        ContentValues values = new ContentValues();
+        values.put(Library.I_CONTENT, content);
+        db.update(Library.TABLE_NAME_I, values,
+                Library.I_ID+"=?"
+                ,new String[]{id+""});
     }
 
     public long getInformationId(String title, String content, Long isTopLevel){

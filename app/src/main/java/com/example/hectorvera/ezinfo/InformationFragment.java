@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hectorvera.ezinfo.POJO.Information;
+import com.example.hectorvera.ezinfo.db.InformationDao;
 import com.example.hectorvera.ezinfo.lib.Library;
 
 public class InformationFragment extends Fragment {
@@ -30,6 +31,8 @@ public class InformationFragment extends Fragment {
     //private static EditText eTitle;
     private static EditText eInformation;
     private ScrollView scInformation;
+    private static String content = null;
+    private static long id = 0L;
     public InformationFragment() {
         // Required empty public constructor
     }
@@ -41,7 +44,7 @@ public class InformationFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_information, container, false);
         cEditable = ((CheckBox) view.findViewById(R.id.cEditable));
@@ -81,14 +84,14 @@ public class InformationFragment extends Fragment {
         bSaveModif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Info info = new Info();
-                info.setName(eTitle.getText().toString());
-                info.setContent(eInformation.getText().toString());
-                info.setImage("");
-                info.setVersion(0);
-
-                FBConnection.updateInfo(info);*/
-                Toast.makeText(v.getContext(), "Saved", Toast.LENGTH_SHORT).show();
+                if(content != null && id != 0) {
+                    content = eInformation.getText().toString();
+                    eInformation.setEnabled(false);
+                    cEditable.setChecked(false);
+                    InformationDao informationDao = new InformationDao(getContext());
+                    informationDao.updateContent(id, content);
+                    //Toast.makeText(v.getContext(), "Saved", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -104,8 +107,9 @@ public class InformationFragment extends Fragment {
         @Override
 
         public void onReceive(Context context, Intent intent) {
-            Info info = FBConnection.readInfo(Library.TITLE);
-            String content = intent.getStringExtra(Library.CONTENT);
+            //Info info = FBConnection.readInfo(Library.TITLE);
+            content = intent.getStringExtra(Library.CONTENT);
+            id = intent.getLongExtra(Library.PARENT_ID, 0L);
             String title = intent.getStringExtra(Library.TITLE);
             boolean connection_flag = intent.getBooleanExtra(Library.CONNECTION_FLAG_KEY, false);
             if(connection_flag){

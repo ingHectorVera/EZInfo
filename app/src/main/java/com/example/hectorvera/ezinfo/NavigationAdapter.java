@@ -112,11 +112,12 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.In
                     informations = informationDao.getInformation(information.getId());
                     notifyDataSetChanged();
                     //if(Test.isContent()) {
-                    if(informations.get(0).getIsTopLevel() == Library.CONTENT_FLAG){
+                    if(informations.size() == 1 && informations.get(0).getIsTopLevel() == Library.CONTENT_FLAG){
                         Intent iSender = new Intent();
                         iSender.setAction(Library.BROADCAST_NAME);
                         iSender.putExtra(Library.CONTENT, informations.get(0).getContent());
                         iSender.putExtra(Library.TITLE, informations.get(0).getName());
+                        iSender.putExtra(Library.PARENT_ID, informations.get(0).getId());
                         iSender.putExtra(Library.CONNECTION_FLAG_KEY, connectionflag);
                         v.getContext().sendBroadcast(iSender);
                     }
