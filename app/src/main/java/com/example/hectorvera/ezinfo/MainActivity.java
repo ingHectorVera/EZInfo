@@ -3,27 +3,17 @@ package com.example.hectorvera.ezinfo;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.hectorvera.ezinfo.POJO.Information;
 import com.example.hectorvera.ezinfo.db.InformationDao;
 import com.example.hectorvera.ezinfo.lib.FirstUpLoad;
 import com.example.hectorvera.ezinfo.lib.Library;
-import com.example.hectorvera.ezinfo.lib.Test;
 import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 
 import java.util.ArrayList;
 
@@ -44,7 +34,10 @@ public class MainActivity extends AppCompatActivity {
 
         if(informationDao.countMainCategories() == 0){
             FirstUpLoad firstUpLoad = new FirstUpLoad(informationDao);
-            firstUpLoad.upLoadMainCategory();
+            firstUpLoad.upLoadCategory(Library.MAIN_CATEGORY);
+            firstUpLoad.upLoadCategory(Library.SUB_CATEGORIES);
+            firstUpLoad.upLoadCategory(Library.CONTENT_FLAG);
+            firstUpLoad.upLoadRelation();
         }
 
         mAuth = FirebaseAuth.getInstance();

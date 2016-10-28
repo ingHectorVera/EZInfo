@@ -26,6 +26,7 @@ import java.util.List;
 public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.InformationHolder>{
 
     private ArrayList<Information> informations;
+    private ArrayList<ArrayList<Information>> backups;
     private ArrayList<Information> backup;
     private List<Info> infos;
     private List<Info> backup2;
@@ -38,6 +39,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.In
     public NavigationAdapter(ArrayList<Information> informations){
         this.informations = informations;
         backup = new ArrayList<Information>();
+        backups = new ArrayList<ArrayList<Information>>();
     }
 
     public NavigationAdapter(List<Info> infos){
@@ -101,16 +103,20 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.In
                 public void onClick(View v) {
                     int pos = getAdapterPosition();//ArrayList<Information> cat = Test.getSubCategories();
                     //int item = getItemCount();
+                    Information information = informations.get(pos);
                     backup = (ArrayList<Information>) informations.clone();
+                    backups.add(backup);
                     informations = null;
                     //notifyItemRangeRemoved(0, item);
-                    informations = Test.getSubCategories();
+                    //informations = Test.getSubCategories();
+                    informations = informationDao.getInformation(information.getId());
                     notifyDataSetChanged();
-                    if(Test.isContent()) {
+                    //if(Test.isContent()) {
+                    if(informations.get(0).getIsTopLevel() == Library.CONTENT_FLAG){
                         Intent iSender = new Intent();
                         iSender.setAction(Library.BROADCAST_NAME);
-                        iSender.putExtra(Library.CONTENT, informations.get(pos).getContent());
-                        iSender.putExtra(Library.TITLE, informations.get(pos).getName());
+                        iSender.putExtra(Library.CONTENT, informations.get(0).getContent());
+                        iSender.putExtra(Library.TITLE, informations.get(0).getName());
                         iSender.putExtra(Library.CONNECTION_FLAG_KEY, connectionflag);
                         v.getContext().sendBroadcast(iSender);
                     }

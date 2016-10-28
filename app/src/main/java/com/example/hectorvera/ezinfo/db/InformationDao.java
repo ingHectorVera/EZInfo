@@ -91,13 +91,13 @@ public class InformationDao extends SQLiteOpenHelper {
         return index;
     }
 
-    public ArrayList<Information> getMainCategories(){
+    public ArrayList<Information> getMSCategories(long isTopLevel){
         ArrayList<Information> mainCat = new ArrayList<Information>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(Library.TABLE_NAME_I,
                 new String[]{Library.I_ID, Library.I_NAME, Library.I_CONTENT, Library.I_IS_TOP_LEVEL}, //columns
                 Library.I_IS_TOP_LEVEL+"= ?",             //Conditions
-                new String[]{Library.MAIN_CATEGORY+""}, //values
+                new String[]{isTopLevel+""}, //values
                 null,null,null);//group by, having, order by
         if(cursor != null){
             if(cursor.moveToFirst()){

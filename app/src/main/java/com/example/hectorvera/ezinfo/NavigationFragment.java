@@ -2,23 +2,19 @@ package com.example.hectorvera.ezinfo;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.hectorvera.ezinfo.POJO.Information;
 import com.example.hectorvera.ezinfo.db.InformationDao;
+import com.example.hectorvera.ezinfo.lib.Library;
 import com.example.hectorvera.ezinfo.lib.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class NavigationFragment extends Fragment {
@@ -53,7 +49,7 @@ public class NavigationFragment extends Fragment {
         if(Test.isFireBaseConnection()){
             connectionflag = true;
         }else {
-            informations =  informationDao.getMainCategories();
+            informations =  informationDao.getMSCategories(Library.MAIN_CATEGORY);
             connectionflag = false;
         }
 
