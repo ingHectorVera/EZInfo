@@ -32,6 +32,7 @@ public class NavigationFragment extends Fragment {
     private EditText infoSearch;
     private ImageButton onSearch;
     private ImageButton bhome;
+    private ImageButton bBackward;
     private boolean connectionflag = false;
     private InformationDao informationDao;
     public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class NavigationFragment extends Fragment {
         nAdapter.setTxtBreadCrumbs(txtBreadCrumbs);
         nAdapter.setOnSearch(onSearch);
         nAdapter.setBhome(bhome);
+        nAdapter.setbBackward(bBackward);
         nAdapter.setInfoSearch(infoSearch);
         nAdapter.setConnectionflag(connectionflag);
         nAdapter.setInformationDao(informationDao);
@@ -85,5 +87,9 @@ public class NavigationFragment extends Fragment {
 
     public void setBhome(ImageButton bhome) {
         this.bhome = bhome;
+    }
+
+    public void setbBackward(ImageButton bBackward) {
+        this.bBackward = bBackward;
     }
 }

@@ -28,6 +28,7 @@ public class ContainerActivity extends AppCompatActivity {
     ImageButton onLogout;
     ImageButton onSearch;
     ImageButton bhome;
+    ImageButton bBackward;
     private TextView txtBreadCrumbs;
     private EditText infoSearch;
 
@@ -44,6 +45,7 @@ public class ContainerActivity extends AppCompatActivity {
         onLogout = ((ImageButton) findViewById(R.id.onLogout));
         onSearch = ((ImageButton) findViewById(R.id.onSearch));
         bhome = ((ImageButton) findViewById(R.id.bhome));
+        bBackward = ((ImageButton) findViewById(R.id.bBackward));
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
@@ -52,6 +54,7 @@ public class ContainerActivity extends AppCompatActivity {
             nf.setTxtBreadCrumbs(txtBreadCrumbs);
             nf.setOnSearch(onSearch);
             nf.setInfoSearch(infoSearch);
+            nf.setbBackward(bBackward);
             nf.setBhome(bhome);
             inf = new InformationFragment();
             if(Methods.isTablet(this)){

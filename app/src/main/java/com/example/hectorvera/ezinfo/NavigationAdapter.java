@@ -17,6 +17,7 @@ import com.example.hectorvera.ezinfo.lib.Library;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.InformationHolder>{
 
@@ -31,6 +32,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.In
     private InformationDao informationDao;
     private ImageButton onSearch;
     private ImageButton bhome;
+    private ImageButton bBackward;
     private EditText infoSearch;
     private boolean isOtherAction = false;
     public NavigationAdapter(){}
@@ -57,10 +59,10 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.In
                 if(!temp.equals("")) {
                     informations = informationDao.search(temp);
                     if (informations == null) {
+
                         Toast.makeText(v.getContext(),temp+" is not in the data base",Toast.LENGTH_SHORT).show();
                     } else {
                         isOtherAction = true;
-                        //connectionflag = true;
                         notifyDataSetChanged();
                         txtBreadCrumbs.setText("");
                         Intent iSender = new Intent();
@@ -98,6 +100,50 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.In
                 iSender.putExtra(Library.CONNECTION_FLAG_KEY, connectionflag);
                 iSender.putExtra(Library.IS_OTHER_FLAG, isOtherAction);
                 v.getContext().sendBroadcast(iSender);
+            }
+        });
+
+        bBackward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(backups.size()<=0) {
+                    informations = informationDao.getMSCategories(Library.MAIN_CATEGORY);
+                    infoSearch.setText("");
+                    txtBreadCrumbs.setText("");
+                    notifyDataSetChanged();
+                    Toast.makeText(v.getContext(), "Main Category", Toast.LENGTH_SHORT).show();
+                }else{
+                    int size = backups.size();
+                    StringTokenizer st = new StringTokenizer(txtBreadCrumbs.getText().toString(),">",true);
+                    informations = backups.remove(size-1);
+                    notifyDataSetChanged();
+                    isOtherAction = true;
+                    Intent iSender = new Intent();
+                    iSender.setAction(Library.BROADCAST_NAME);
+                    iSender.putExtra(Library.CONTENT, "");
+                    iSender.putExtra(Library.TITLE, "");
+                    iSender.putExtra(Library.PARENT_ID, 0L);
+                    iSender.putExtra(Library.CONNECTION_FLAG_KEY, connectionflag);
+                    iSender.putExtra(Library.IS_OTHER_FLAG, isOtherAction);
+                    if(st.countTokens() == 2){
+                        txtBreadCrumbs.setText("");
+                    }else if(st.countTokens() > 2){
+                        int temp = st.countTokens() - 2;
+                        //int i = 1;
+                        txtBreadCrumbs.setText("");
+                        for(int i = 1; i<= temp; i++){
+                            txtBreadCrumbs.setText(txtBreadCrumbs.getText().toString() + st.nextToken());
+                        }
+                        /*while (st.hasMoreElements()){
+                            if(i < temp){
+                                txtBreadCrumbs.setText(txtBreadCrumbs.getText().toString() + st.nextToken());
+                                st.
+                            }
+                            i++;
+                        }*/
+                    }
+                    v.getContext().sendBroadcast(iSender);
+                }
             }
         });
         return new InformationHolder(v);
@@ -149,6 +195,10 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.In
         this.bhome = bhome;
     }
 
+    public void setbBackward(ImageButton bBackward) {
+        this.bBackward = bBackward;
+    }
+
 
     public class InformationHolder extends RecyclerView.ViewHolder{
 
@@ -181,11 +231,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.In
                         iSender.putExtra(Library.CONNECTION_FLAG_KEY, connectionflag);
                         v.getContext().sendBroadcast(iSender);
                     }
-                    if(backup.get(pos).getIsTopLevel()==Library.MAIN_CATEGORY){
-                        txtBreadCrumbs.setText(backup.get(pos).getName());
-                    }else{
-                        txtBreadCrumbs.setText(txtBreadCrumbs.getText().toString()+">"+backup.get(pos).getName());
-                    }
+                    txtBreadCrumbs.setText(txtBreadCrumbs.getText().toString()+">"+backup.get(pos).getName());
                 }
             });
         }
