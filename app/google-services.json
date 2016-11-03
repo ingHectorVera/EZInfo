@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "382933115143",
+    "firebase_url": "https://ezinfo-145f9.firebaseio.com",
+    "project_id": "ezinfo-145f9",
+    "storage_bucket": "ezinfo-145f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382933115143:android:43a36a22a2a61547",
+        "android_client_info": {
+          "package_name": "com.example.hectorvera.ezinfo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382933115143-94h2b8pialei9i5mng89hiotd9k7m3b2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hectorvera.ezinfo",
+            "certificate_hash": "8222810CD819E4D07F71510427E91442D650322B"
+          }
+        },
+        {
+          "client_id": "382933115143-g5grtsm1hrhu4ku0pk5n29nu50jh36rn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhB36fhV4hyobp5F1-4q2w_vEp71bGZ1g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382933115143-g5grtsm1hrhu4ku0pk5n29nu50jh36rn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
