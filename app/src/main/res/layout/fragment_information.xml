@@ -15,11 +15,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cEditable"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
             android:text="@string/edit_information"/>
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:id="@+id/cSave"
             android:text="@string/save_information"/>
 
@@ -37,6 +40,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:id="@+id/eInformation"/>
     </ScrollView>
 </LinearLayout>
