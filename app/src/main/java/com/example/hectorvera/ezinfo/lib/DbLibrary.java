@@ -2,10 +2,6 @@ package com.example.hectorvera.ezinfo.lib;
 
 import static com.example.hectorvera.ezinfo.lib.Library.*;
 
-/**
- * Created by User on 10/26/2016.
- */
-
 public class DbLibrary {
     public static String CREATE_INFORMATION_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_I + " ("
             + I_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+
@@ -28,18 +24,19 @@ public class DbLibrary {
             "WHERE I.id = R."+R_CONTENT_ID +
             " AND R."+Library.R_PARENT_ID + "= ?";
 
+    /*public static String SELECT_SEARCH = "SELECT * FROM "+ Library.TABLE_NAME_I +
+            " WHERE ("+Library.I_NAME+ " LIKE '% ? %' OR " +
+            Library.I_CONTENT + " LIKE '% ? %') AND (" +
+            Library.I_IS_TOP_LEVEL +"= ?)";*/
+
     public static String SELECT_SEARCH = "SELECT * FROM "+ Library.TABLE_NAME_I +
-            " WHERE ("+Library.I_NAME+ " LIKE %?% OR " +
-            Library.I_CONTENT + " LIKE %?%) AND (" +
-            Library.I_IS_TOP_LEVEL +"= ?)";
+            " WHERE ("+Library.I_NAME+ " LIKE ?  OR " +
+            Library.I_CONTENT + " LIKE ? ) AND (" +
+            Library.I_IS_TOP_LEVEL +"= ? )";
 
     public static String DELETE_RELATION = "DELETE FROM "+TABLE_NAME_R
             + " WHERE "+R_CONTENT_ID+"=?";
 
     public static String DELETE_INFORMATION = "DELETE FROM "+TABLE_NAME_I
             + " WHERE "+I_ID+"=?";
-
-    public static String UPDATE_CONTENT = "UPDATE "+ Library.TABLE_NAME_I +
-            " SET "+Library.I_CONTENT + "=? WHERE "+
-            Library.I_ID + "=?";
 }

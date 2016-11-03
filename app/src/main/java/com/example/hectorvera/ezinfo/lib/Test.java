@@ -180,6 +180,7 @@ public class Test {
         relations.add(new Relation(49L,59L,47L));
         relations.add(new Relation(50L,60L,48L));
         relations.add(new Relation(51L,61L,49L));
+        relations.add(new Relation(32L,42L,50L));
         return relations;
     }
 

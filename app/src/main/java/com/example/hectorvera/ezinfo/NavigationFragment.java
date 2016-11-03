@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.hectorvera.ezinfo.POJO.Information;
@@ -27,6 +29,9 @@ public class NavigationFragment extends Fragment {
     private RecyclerView.LayoutManager nlayoutManager;
     private NavigationAdapter nAdapter;
     private TextView txtBreadCrumbs;
+    private EditText infoSearch;
+    private ImageButton onSearch;
+    private ImageButton bhome;
     private boolean connectionflag = false;
     private InformationDao informationDao;
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,9 @@ public class NavigationFragment extends Fragment {
 
         nAdapter = new NavigationAdapter(informations);
         nAdapter.setTxtBreadCrumbs(txtBreadCrumbs);
+        nAdapter.setOnSearch(onSearch);
+        nAdapter.setBhome(bhome);
+        nAdapter.setInfoSearch(infoSearch);
         nAdapter.setConnectionflag(connectionflag);
         nAdapter.setInformationDao(informationDao);
         navegationRV.setAdapter(nAdapter);
@@ -65,5 +73,17 @@ public class NavigationFragment extends Fragment {
 
     public void setTxtBreadCrumbs(TextView txtBreadCrumbs) {
         this.txtBreadCrumbs = txtBreadCrumbs;
+    }
+
+    public void setOnSearch(ImageButton onSearch) {
+        this.onSearch = onSearch;
+    }
+
+    public void setInfoSearch(EditText infoSearch) {
+        this.infoSearch = infoSearch;
+    }
+
+    public void setBhome(ImageButton bhome) {
+        this.bhome = bhome;
     }
 }

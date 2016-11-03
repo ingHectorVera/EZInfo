@@ -12,12 +12,26 @@
     android:background="@drawable/background2"
     tools:context="com.example.hectorvera.ezinfo.ContainerActivity">
 
-    <Button
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="@string/logout"
-        android:id="@+id/onLogout"/>
+        android:orientation="horizontal">
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/home"
+            android:background="@null"
+            android:id="@+id/bhome"/>
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/logout"
+            android:layout_gravity="right"
+            android:background="@null"
+            android:id="@+id/onLogout"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,14 +40,23 @@
             android:layout_width="0dp"
             android:layout_weight="2"
             android:id="@+id/infoSearch"
+            android:shadowColor="@color/white"
             android:textColor="@color/white"
             android:layout_height="match_parent"/>
-        <Button
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@mipmap/search"
+            android:background="@null"
+            android:id="@+id/onSearch"
+            android:text="@string/search"/>
+        <!--<Button
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:id="@+id/onSearch"
-            android:text="@string/search"/>
+            android:text="@string/search"/>-->
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +27,7 @@ import com.example.hectorvera.ezinfo.lib.Library;
 public class InformationFragment extends Fragment {
 
     private CheckBox cEditable;
-    private Button bSaveModif;
+    private ImageButton bSaveModif;
     private static CheckBox cSave;
     //private static EditText eTitle;
     private static EditText eInformation;
@@ -52,7 +53,8 @@ public class InformationFragment extends Fragment {
         scInformation = ((ScrollView) view.findViewById(R.id.scInformation));
         //eTitle = ((EditText) view.findViewById(R.id.eTitle));
         eInformation = ((EditText) view.findViewById(R.id.eInformation));
-        bSaveModif = ((Button) view.findViewById(R.id.bSaveModif));
+        bSaveModif = ((ImageButton) view.findViewById(R.id.bSaveModif));
+        bSaveModif.setImageResource(R.mipmap.no_save);
         bSaveModif.setEnabled(false);
 
         eInformation.setEnabled(false);
@@ -63,9 +65,11 @@ public class InformationFragment extends Fragment {
                 if(isChecked){
                     eInformation.setEnabled(true);
                     bSaveModif.setEnabled(true);
+                    bSaveModif.setImageResource(R.mipmap.save);
                 }else {
                     eInformation.setEnabled(false);
                     bSaveModif.setEnabled(false);
+                    bSaveModif.setImageResource(R.mipmap.no_save);
                 }
             }
         });
@@ -112,12 +116,18 @@ public class InformationFragment extends Fragment {
             id = intent.getLongExtra(Library.PARENT_ID, 0L);
             String title = intent.getStringExtra(Library.TITLE);
             boolean connection_flag = intent.getBooleanExtra(Library.CONNECTION_FLAG_KEY, false);
+            boolean isOtherAction = intent.getBooleanExtra(Library.IS_OTHER_FLAG, false);
             if(connection_flag){
                 cSave.setText("Save information");
                 cSave.setChecked(false);
             }else {
-                cSave.setText("Information saved");
-                cSave.setChecked(true);
+                if(isOtherAction){
+                    cSave.setText("Save information");
+                    cSave.setChecked(false);
+                }else {
+                    cSave.setText("Information saved");
+                    cSave.setChecked(true);
+                }
             }
             //eTitle.setText(title);
             eInformation.setText(content);

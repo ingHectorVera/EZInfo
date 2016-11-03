@@ -25,6 +25,7 @@ public class Library {
     public static final String CONTENT = "Content";
     public static final String PARENT_ID = "parentId";
     public static final String CONNECTION_FLAG_KEY = "ConnectionFlag";
+    public static final String IS_OTHER_FLAG = "IsOtherFlag";
     public static final long MAIN_CATEGORY = 0;
     public static final long SUB_CATEGORIES = 1;
     public static final long CONTENT_FLAG = 2;

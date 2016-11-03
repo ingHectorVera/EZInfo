@@ -155,24 +155,27 @@ public class InformationDao extends SQLiteOpenHelper {
 
     public ArrayList<Information> search(String keyWord){
         int count = 0;
+        String temp = "%"+keyWord+"%";
         ArrayList<Information> informations = new ArrayList<Information>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
         do{
             if(count == 0){
                 cursor = db.rawQuery(DbLibrary.SELECT_SEARCH,
-                        new String[]{keyWord, keyWord, Library.MAIN_CATEGORY+""});
+                        new String[]{temp, temp, Library.MAIN_CATEGORY+""});
             }else if(count == 1){
                 cursor = db.rawQuery(DbLibrary.SELECT_SEARCH,
-                        new String[]{keyWord, keyWord, Library.SUB_CATEGORIES+""});
-            }else if(count == 2){
+                        new String[]{temp, temp, Library.SUB_CATEGORIES+""});
+            }
+            /*else if(count == 2){
                 cursor = db.rawQuery(DbLibrary.SELECT_SEARCH,
-                        new String[]{keyWord, keyWord, Library.CONTENT_FLAG+""});
-            }else if(count == 3){
+                        new String[]{temp, temp, Library.CONTENT_FLAG+""});
+            }*/
+            else if(count == 2){
                 return null;
             }
             count++;
-        }while (cursor == null);
+        }while (cursor == null || cursor.getCount() <= 0);
         if(cursor.moveToFirst()){
             do{
                 informations.add(new Information(

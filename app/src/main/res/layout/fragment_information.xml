@@ -23,14 +23,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
+            android:buttonTint="@color/white"
             android:id="@+id/cSave"
             android:text="@string/save_information"/>
 
-        <Button
+        <!--<Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bSaveModif"
-            android:text="@string/saved_modificaton"/>
+            android:text="@string/saved_modificaton"/>-->
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/save"
+            android:background="@null"
+            android:id="@+id/bSaveModif" />
 
     </LinearLayout>
     <ScrollView

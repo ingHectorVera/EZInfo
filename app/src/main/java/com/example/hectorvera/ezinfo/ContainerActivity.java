@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,8 +24,12 @@ public class ContainerActivity extends AppCompatActivity {
     NavigationFragment nf;
     InformationFragment inf;
     LinearLayout navigationId, informationId;
-    Button onLogout;
+    //Button onLogout;
+    ImageButton onLogout;
+    ImageButton onSearch;
+    ImageButton bhome;
     private TextView txtBreadCrumbs;
+    private EditText infoSearch;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +39,20 @@ public class ContainerActivity extends AppCompatActivity {
         navigationId = ((LinearLayout) findViewById(R.id.navigationId));
         informationId = ((LinearLayout) findViewById(R.id.informationId));
         txtBreadCrumbs = ((TextView) findViewById(R.id.txtBreadCrumbs));
-        onLogout = ((Button) findViewById(R.id.onLogout));
+        infoSearch = ((EditText) findViewById(R.id.infoSearch));
+        //onLogout = ((Button) findViewById(R.id.onLogout));
+        onLogout = ((ImageButton) findViewById(R.id.onLogout));
+        onSearch = ((ImageButton) findViewById(R.id.onSearch));
+        bhome = ((ImageButton) findViewById(R.id.bhome));
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
         if((navigationId!= null)&&(informationId!=null)){
             nf = new NavigationFragment();
             nf.setTxtBreadCrumbs(txtBreadCrumbs);
+            nf.setOnSearch(onSearch);
+            nf.setInfoSearch(infoSearch);
+            nf.setBhome(bhome);
             inf = new InformationFragment();
             if(Methods.isTablet(this)){
                 transaction.add(R.id.navigationId, nf);
@@ -74,18 +87,4 @@ public class ContainerActivity extends AppCompatActivity {
         });
 
     }
-
-
-
-    /*public void onLogout(View view) {
-
-        AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
-            public void onComplete(@NonNull Task<Void> task) {
-                //user is now signed out
-                Toast.makeText(MainActivity.this, "Logged Out", Toast.LENGTH_LONG).show();
-                finish();
-            }
-        });
-
-    }*/
 }
